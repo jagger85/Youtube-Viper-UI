@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { useSendInternalMessage } from '../contexts/MessageContext';
 import { useSendMessage } from '../contexts/MessageContext';
+import { API_BASE_URL } from '../hooks/useApi';
 
-const backendHost = import.meta.env.VITE_BACKEND_HOST || 'localhost'
-const backendPort = import.meta.env.VITE_BACKEND_PORT || '3000'
 
 export function useSSE() {
   const sendMessage = useSendInternalMessage();
   const serverMessage = useSendMessage();
 
   useEffect(() => {
-    const backendUrl = `https://${backendHost}:${backendPort}/flux-stream`;
+    const backendUrl = `${API_BASE_URL}/flux-stream`;
     const eventSource = new EventSource(backendUrl);
     eventSource.onopen = () => { 
       sendMessage("Connection to the network established. Awaiting data influx...");
@@ -39,8 +38,7 @@ export async function sendYoutubeUrl(url, language, prompt, sendMessage) {
   sendMessage(`Transmitting the requested URL... routing through the grid`);
   return new Promise((resolve, reject) => {
     try {
-      const backendUrl = `https://${backendHost}:${backendPort}`;
-      const eventSource = new EventSource(`${backendUrl}/feed-system-target?url=${encodeURIComponent(url)}&language=${language}&prompt=${encodeURIComponent(prompt)}`);
+      const eventSource = new EventSource(`${API_BASE_URL}/feed-system-target?url=${encodeURIComponent(url)}&language=${language}&prompt=${encodeURIComponent(prompt)}`);
       
       eventSource.onmessage = (event) => {
         console.log('Received message:', event.data);
