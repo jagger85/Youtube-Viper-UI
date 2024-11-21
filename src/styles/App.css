@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #00b4d8;
+  --accent-color-darker: #0090a8;
+  --secondary-bg: #060910;
+  --svg-icon: invert(10%) sepia(98%) saturate(4160%) hue-rotate(181deg) brightness(97%) contrast(99%);
+  --svg-icon-hover: invert(51%) sepia(69%) saturate(2310%) hue-rotate(154deg) brightness(98%) contrast(101%);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto Mono', monospace; /* Changed to Roboto Mono for a more computer-like look */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+#root {
+  height: 100%;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center; /* Center vertically */
+}
+
+header {
+  background-color: var(--secondary-bg);
+  padding: 1rem;
+  text-align: center;
+  /* Removed the box-shadow */
+}
+
+h1 {
+  color: var(--accent-color);
+  margin: 0;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center vertically */
+  width: 100%;
+  min-width: 50vw; /* Added: minimum width of 50% of the viewport width */
+  max-width: 1200px; /* Increased for larger screens */
+  margin: 0 auto;
+  padding: 0 2rem; /* Added padding for smaller screens */
+  box-sizing: border-box;
+}
+
+h2 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+p {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 0;
+}
+
+footer {
+  background-color: var(--secondary-bg);
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  display: flex; /* Added to center content */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Add some tech-inspired elements */
+.tech-border {
+  border: 2px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: rgba(0, 180, 216, 0.05);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.1),
+              0 0 0 2px var(--accent-color),
+              0 0 30px rgba(0, 180, 216, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Remove the following rules */
+/* .tech-border::before { ... } */
+/* @keyframes rotate { ... } */
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Style for the YouTube Downloader Form */
+form {
+  width: 100%;
+  min-width: 50vw; /* Added: minimum width of 50% of the viewport width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center form elements */
+  gap: 1rem;
+}
+
+input, button, .text-area {
+  width: 100%;
+}
+
+input, button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+}
+
+button {
+  width: auto;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto; /* Center the button */
+}
+
+button:hover {
+  background-color: #0090a8;
+}
+
+.scrapped-text-field {
+  width: 100%;
+  margin-top: 0; /* Remove top margin as it's now horizontal */
+  margin-bottom: 2rem; /* Add space between components */
+}
+
+.text-area {
+  width: 100%;
+  height: 150px;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--secondary-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  resize: vertical;
+  margin-bottom: 1rem;
+  user-select: none; /* Make text unselectable */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For IE10+/Edge */
+}
+
+.copy-button {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%; /* Make the button full width */
+  max-width: 300px; /* Limit the maximum width */
+  margin: 0 auto; /* Center the button */
+}
+
+.copy-button:hover {
+  background-color: #0090a8;
+}
+
+.horizontal-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.youtube-downloader,
+.scrapped-text-field {
+  width: 100%;
+  min-width: 50vw; /* Added: minimum width of 50% of the viewport width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  width: 100%;
+  min-width: 50vw; /* Added: minimum width of 50% of the viewport width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+input, .text-area, .form-actions {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+button, .language-selector {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold; /* Make button text thicker */
+  text-align: center; /* Ensure text is centered */
+}
+
+.language-selector {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23121212' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.language-selector::-ms-expand {
+  display: none;
+}
+
+button:hover, .language-selector:hover {
+  background-color: #0090a8;
+}
+
+/* Event Display Styles */
+.event-display {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
+.event-display p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.language-selector {
+  width: auto;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.language-selector:hover {
+  background-color: #0090a8;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

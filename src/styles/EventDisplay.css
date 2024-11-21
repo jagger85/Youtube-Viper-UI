@@ -1,0 +1,57 @@
+:root {
+  --terminal-bg: #0C0C0C;
+  --terminal-text: #e0e0e0;
+  --terminal-border: #00b4d8;
+  --terminal-error: #FF0000;
+}
+
+.event-display.cyberpunk-terminal {
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  font-family: 'Courier New', monospace;
+  border: 2px solid var(--terminal-border);
+  overflow: hidden;
+  max-width: 90%;
+  height: 15vh;
+  margin: 20px auto;
+}
+
+.terminal-body {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.log-entry {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 5px; /* Add some space between entries */
+}
+
+.prompt {
+  color: var(--terminal-border);
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.message {
+  color: var(--terminal-text);
+  word-break: break-word;
+  text-align: left;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.error {
+  color: var(--terminal-error);
+}
+
+.awaiting {
+  color: var(--terminal-border);
+}
+
+/* Custom scrollbar styles remain unchanged */
