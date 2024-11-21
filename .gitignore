@@ -16,7 +16,8 @@ __pycache__
 *.pyc
 
 # Environment files
-.env
+.env.development
+.env.production
 **/.env
 *.local
 
@@ -31,9 +32,6 @@ logs
 cookies.txt
 **/cookies.txt
 
-# Security related
-cert.pem
-key.pem
 
 # Editor and OS files
 .vscode/*
