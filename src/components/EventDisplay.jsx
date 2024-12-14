@@ -1,13 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import '../styles/EventDisplay.css'; // Make sure to create this CSS file
-import { useMessageContext } from '../contexts/MessageContext';
-import { useSSE } from '../utils/ServerServices';
+import React, { useEffect, useRef } from "react"
+import '../styles/EventDisplay.css'
+import { useMessageContext } from '../contexts/MessageContext'
 
 function EventDisplay() {
   const { messages } = useMessageContext();
   const eventContainerRef = useRef(null);
 
-  useSSE();
 
   useEffect(() => {
     if (eventContainerRef.current) {

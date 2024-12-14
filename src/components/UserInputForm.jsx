@@ -1,72 +1,83 @@
-import React, { useState, useRef, useEffect } from 'react';
-import '../styles/UserInputForm.css'; // Make sure to create this CSS file
-import { sendYoutubeUrl } from '../utils/ServerServices';
-import { useSendInternalMessage } from '../contexts/MessageContext';
+import React, { useState, useRef, useEffect } from 'react'
+import '../styles/UserInputForm.css' // Make sure to create this CSS file
+import { sendYoutubeUrl } from '../utils/ServerServices'
+import { useSendInternalMessage } from '../contexts/MessageContext'
 
 function UserInputForm({ onTranscriptionReceived }) {
-  const [url, setUrl] = useState('');
-  const [prompt, setPrompt] = useState('');
-  const [language, setLanguage] = useState('en');
-  const [isDecrypting, setIsDecrypting] = useState(false);
-  const [dots, setDots] = useState('');
-  const inputRef = useRef(null);
-  const sendMessage = useSendInternalMessage();
+  const [url, setUrl] = useState('')
+  const [prompt, setPrompt] = useState('')
+  const [language, setLanguage] = useState('en')
+  const [isDecrypting, setIsDecrypting] = useState(false)
+  const [dots, setDots] = useState('')
+  const inputRef = useRef(null)
+  const sendMessage = useSendInternalMessage()
 
   useEffect(() => {
     if (isDecrypting) {
       const interval = setInterval(() => {
-        setDots(prevDots => {
-          if (prevDots.length >= 3) return '';
-          return prevDots + '.';
-        });
-      }, 500);
-      return () => clearInterval(interval);
+        setDots((prevDots) => {
+          if (prevDots.length >= 3) return ''
+          return prevDots + '.'
+        })
+      }, 500)
+      return () => clearInterval(interval)
     } else {
-      setDots('');
+      setDots('')
     }
-  }, [isDecrypting]);
+  }, [isDecrypting])
 
   useEffect(() => {
     if (isDecrypting && inputRef.current) {
-      inputRef.current.blur();
+      inputRef.current.blur()
     }
-  }, [isDecrypting]);
+  }, [isDecrypting])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+    e.preventDefault()
+
     function isValidYoutubeUrl(url) {
-      const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
-      return regex.test(url);
+      const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+      return regex.test(url)
     }
-    
-    if(isValidYoutubeUrl(url)){
+
+    if (isValidYoutubeUrl(url)) {
       try {
-      setIsDecrypting(true);
-        const transcription = await sendYoutubeUrl(url, language, prompt, sendMessage);
+        setIsDecrypting(true)
+        const transcription = await sendYoutubeUrl(
+          url,
+          language,
+          prompt,
+          sendMessage
+        )
         if (transcription !== null) {
-          onTranscriptionReceived(transcription);
+          onTranscriptionReceived(transcription)
         } else {
-          console.error('Transcription failed or returned null');
+          console.error('Transcription failed or returned null')
         }
       } catch (err) {
-        console.error('Error setting up EventSource:', err);
+        console.error('Error setting up EventSource:', err)
       } finally {
-        setIsDecrypting(false);
+        setIsDecrypting(false)
       }
-    }
-    else{
+    } else {
       console.log(url)
-      url === '' ? sendMessage("Error: The data stream requires an address—empty fields won't transmit") :
-      sendMessage("Input rejected: Only a valid YouTube address can breach the grid.")
+      url === ''
+        ? sendMessage(
+            "Error: The data stream requires an address—empty fields won't transmit"
+          )
+        : sendMessage(
+            'Input rejected: Only a valid YouTube address can breach the grid.'
+          )
     }
-    
   }
   return (
     <div className="user-input-form">
       <form onSubmit={handleSubmit}>
-        <div className="input-container" style={{ display: 'flex', alignItems: 'center' }}>
-         <div className="input-label-container">URL&gt;</div>
+        <div
+          className="input-container"
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <div className="input-label-container">URL&gt;</div>
           <input
             id="urlInput"
             ref={inputRef}
@@ -78,8 +89,11 @@ function UserInputForm({ onTranscriptionReceived }) {
             onFocus={(e) => isDecrypting && e.target.blur()}
           />
         </div>
-        <div className="input-container" style={{ display: 'flex', alignItems: 'center' }}>
-         <div className="input-label-container"> Prompt&gt; </div>
+        <div
+          className="input-container"
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <div className="input-label-container"> Prompt&gt; </div>
           <input
             id="promptInput"
             type="text"
@@ -89,7 +103,11 @@ function UserInputForm({ onTranscriptionReceived }) {
           />
         </div>
         <div className="form-actions">
-          <button type="submit" disabled={isDecrypting} className="decrypt-button">
+          <button
+            type="submit"
+            disabled={isDecrypting}
+            className="decrypt-button"
+          >
             <span className="button-content">
               <span className="button-text">
                 {isDecrypting ? 'Decrypting' : 'Extract Data'}
@@ -110,7 +128,7 @@ function UserInputForm({ onTranscriptionReceived }) {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default UserInputForm;
+export default UserInputForm
