@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import '../styles/UserInputForm.css' // Make sure to create this CSS file
-import { sendYoutubeUrl } from '../utils/ServerServices'
+import { sendYoutubeUrl } from '../hooks/useApi'
 import { useSendInternalMessage } from '../contexts/MessageContext'
+import useStorage from '../hooks/useStorage'
 
 function UserInputForm({ onTranscriptionReceived }) {
   const [url, setUrl] = useState('')
@@ -11,6 +12,7 @@ function UserInputForm({ onTranscriptionReceived }) {
   const [dots, setDots] = useState('')
   const inputRef = useRef(null)
   const sendMessage = useSendInternalMessage()
+  const { retrieveUserId } = useStorage()
 
   useEffect(() => {
     if (isDecrypting) {
@@ -32,13 +34,13 @@ function UserInputForm({ onTranscriptionReceived }) {
     }
   }, [isDecrypting])
 
+  const isValidYoutubeUrl = (url) => {
+    const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+    return regex.test(url)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    function isValidYoutubeUrl(url) {
-      const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
-      return regex.test(url)
-    }
 
     if (isValidYoutubeUrl(url)) {
       try {
@@ -47,10 +49,11 @@ function UserInputForm({ onTranscriptionReceived }) {
           url,
           language,
           prompt,
-          sendMessage
+          sendMessage,
+          retrieveUserId()
         )
         if (transcription !== null) {
-          onTranscriptionReceived(transcription)
+          onTranscriptionReceived(transcription.result)
         } else {
           console.error('Transcription failed or returned null')
         }
@@ -60,14 +63,13 @@ function UserInputForm({ onTranscriptionReceived }) {
         setIsDecrypting(false)
       }
     } else {
-      console.log(url)
       url === ''
         ? sendMessage(
-            "Error: The data stream requires an address—empty fields won't transmit"
-          )
+          "Error: The data stream requires an address—empty fields won't transmit"
+        )
         : sendMessage(
-            'Input rejected: Only a valid YouTube address can breach the grid.'
-          )
+          'Input rejected: Only a valid YouTube address can breach the grid.'
+        )
     }
   }
   return (

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import '../styles/ScrappedTextField.css' // Make sure to create this CSS file
+import '../styles/ScrappedTextField.css'
 
 function ResponseTextArea({ text }) {
   const textAreaRef = useRef(null)
