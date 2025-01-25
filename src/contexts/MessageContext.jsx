@@ -1,18 +1,34 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
-
+import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import useWebSocket from 'react-use-websocket'
+import  useStorage  from '../hooks/useStorage';
+import { MESSAGE_TYPE } from '../constants/messageType';
 const MessageContext = createContext();
 
 export const MessageProvider = ({ children }) => {
+  const { saveUserId } = useStorage();
+
+  const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8000/echo', {
+    shouldReconnect: () => true,
+    reconnectAttempts: 10,
+    reconnectInterval: 3000,
+  });
+
+  useEffect(() => {
+    if (lastMessage !== null) {
+      console.log(lastMessage.data);
+      addMessage(JSON.parse(lastMessage.data));
+    }
+  }, [lastMessage]);
+
+
   const [messages, setMessages] = useState([]);
 
   const addMessage = useCallback((message) => {
-    const [level, ...msgParts] = message.split(': ');
-    const msg = msgParts.join(': ');
 
     setMessages((prevMessages) => {
       const newMessages = [...prevMessages];
-      
-      switch (level) {
+
+      switch (message.type) {
         case 'PROGRESS':
           if (newMessages.length > 0 && newMessages[newMessages.length - 1].type === 'progress') {
             newMessages[newMessages.length - 1] = { type: 'progress', content: msg };
@@ -20,25 +36,18 @@ export const MessageProvider = ({ children }) => {
             newMessages.push({ type: 'progress', content: msg });
           }
           break;
-        case 'DEBUG':
-          newMessages.push({ type: 'debug', content: msg });
+        case MESSAGE_TYPE.LOGIN:
+          saveUserId(message.client_id);
+          newMessages.push({ type: 'login', content: "You are connected to the brain"});
           break;
-        case 'INFO':
-          newMessages.push({ type: 'info', content: msg });
-          break;
-        case 'WARNING':
-          newMessages.push({ type: 'warning', content: msg });
-          break;
-        case 'ERROR':
-          newMessages.push({ type: 'error', content: msg });
-          break;
-        case 'CRITICAL':
-          newMessages.push({ type: 'critical', content: msg });
+        case MESSAGE_TYPE.OPERATION_STATUS:
+          newMessages.push({ type: message.type, content:`Your operation is currently ${message.status}`});
           break;
         default:
-          newMessages.push({ type: 'normal', content: msg });
+          console.log('Unknown message type:', message.type);
+          console.log('Message:', message);
       }
-      
+
       return newMessages;
     });
   }, []);
