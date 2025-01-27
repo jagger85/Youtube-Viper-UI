@@ -1,5 +1,6 @@
 # Speecher UI
 
+[![React][React.js]][React-url]
 A React-based frontend for the Speecher application.
 
 ![SpeecherUI-Screenshot](https://a4mmc7pg4m.ufs.sh/f/ceoH2hzLMEl0zKb954HsjGw4SrdhmEglIkQPcAuLv7RBFpqW)
@@ -53,3 +54,5 @@ VITE_BACKEND_PORT=8000
 ```bash
 npm run dev
 ```
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
