@@ -30,7 +30,7 @@ form {
 }
 
 .decrypt-button,
-.language-selector {
+.operationType-selector {
   flex: 1;
   padding: 0.75rem 1rem;
   border: none;
@@ -71,7 +71,7 @@ form {
   100% { clip-path: inset(50% 0 30% 0); }
 }
 
-/* Keep the existing styles for .language-selector and other elements */
+/* Keep the existing styles for .operationType-selector and other elements */
 
 .input-label-container {
   background-color: var(--secondary-bg); /* Match the input background color */

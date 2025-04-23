@@ -4,10 +4,11 @@ import FloppyDisk from '../assets/floppy-disk-svgrepo-com.svg'
 import Copy from '../assets/copy-svgrepo-com.svg'
 import { useSendMessage } from '../contexts/MessageContext'
 import useStoreFile from '../hooks/useStoreFile'
+import { MESSAGE_TYPE } from '../constants/messageType'
 
-const Icons = () => {
+const Icons = (props) => {
   const [hoveredIcon, setHoveredIcon] = useState(null)
-  const { storeFile, copyNeoToClipboard } = useStoreFile()
+  const { storeFile, copyNeoToClipboard, createTxtFile } = useStoreFile()
   const sendMessage = useSendMessage()
   const [error, setError] = useState(null)
 
@@ -23,7 +24,7 @@ const Icons = () => {
     if (file && file.type === 'text/plain') {
       storeFile(file, 'trinity')
       setError(null)
-      sendMessage('The file is now uploaded into system memory...')
+      sendMessage({type: MESSAGE_TYPE.INFO, content: 'The file is now uploaded into system memory...'})
     } else {
       setError('Please select valid data')
     }
@@ -51,7 +52,7 @@ const Icons = () => {
         style={iconStyle('floppy')}
         onMouseEnter={() => setHoveredIcon('floppy')}
         onMouseLeave={() => setHoveredIcon(null)}
-        onClick={() => document.getElementById('fileInput').click()} // Trigger file input click
+        onClick={()=>createTxtFile(props.text)}
       />
       <img
         src={Copy}
@@ -59,7 +60,7 @@ const Icons = () => {
         style={iconStyle('copy')}
         onMouseEnter={() => setHoveredIcon('copy')}
         onMouseLeave={() => setHoveredIcon(null)}
-        onClick={copyNeoToClipboard}
+        onClick={()=>copyNeoToClipboard(props.text)}
       />
       <input
         type="file"

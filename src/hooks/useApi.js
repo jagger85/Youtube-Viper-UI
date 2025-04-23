@@ -21,15 +21,22 @@ const getWebsocketUrl = () => {
 export const WEB_SOCKET_URL = getWebsocketUrl()
 export const API_BASE_URL = getBaseUrl()
 
-export const sendYoutubeUrl = async (url, language, prompt, sendMessage, userId) => {
+export const sendYoutubeUrl = async (url, operationType, prompt, sendMessage, userId) => {
   try {
-    // Construct the URL more explicitly
-    const apiUrl = `${API_BASE_URL}/speecher`
+    const apiUrl = `${API_BASE_URL}/api/speecher`
     console.log('API URL:', apiUrl)
+
+    // Create base query params
     const queryParams = new URLSearchParams({
       video_url: url,
-      client_id: userId
+      client_id: userId,
+      operation_type: operationType,
     })
+
+    // Only add prompt if it's not empty
+    if (prompt !== "") {
+      queryParams.append('prompt', prompt)
+    }
 
     const response = await fetch(`${apiUrl}?${queryParams}`, {
       headers: {

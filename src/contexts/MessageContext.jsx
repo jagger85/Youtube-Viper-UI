@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
 import useWebSocket from 'react-use-websocket'
-import  useStorage  from '../hooks/useStorage';
+import useStorage from '../hooks/useStorage';
 import { MESSAGE_TYPE } from '../constants/messageType';
 const MessageContext = createContext();
 
@@ -35,14 +35,20 @@ export const MessageProvider = ({ children }) => {
           } else {
             newMessages.push({ type: 'progress', content: msg });
           }
-          break;
+          break
+
         case MESSAGE_TYPE.LOGIN:
           saveUserId(message.client_id);
-          newMessages.push({ type: 'login', content: "You are connected to the brain"});
-          break;
+          newMessages.push({ type: 'login', content: "You are connected to the brain" });
+          break
+
         case MESSAGE_TYPE.OPERATION_STATUS:
-          newMessages.push({ type: message.type, content:`Your operation is currently ${message.status}`});
-          break;
+          newMessages.push({ type: message.type, content: `Your operation is currently ${message.status}` });
+          break
+
+        case MESSAGE_TYPE.INFO:
+          newMessages.push({ type: message.type, content: message.content })
+          break
         default:
           console.log('Unknown message type:', message.type);
           console.log('Message:', message);

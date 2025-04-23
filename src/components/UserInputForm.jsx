@@ -7,7 +7,7 @@ import useStorage from '../hooks/useStorage'
 function UserInputForm({ onTranscriptionReceived }) {
   const [url, setUrl] = useState('')
   const [prompt, setPrompt] = useState('')
-  const [language, setLanguage] = useState('en')
+  const [operationType, setOperationType] = useState('process')
   const [isDecrypting, setIsDecrypting] = useState(false)
   const [dots, setDots] = useState('')
   const inputRef = useRef(null)
@@ -47,7 +47,7 @@ function UserInputForm({ onTranscriptionReceived }) {
         setIsDecrypting(true)
         const transcription = await sendYoutubeUrl(
           url,
-          language,
+          operationType,
           prompt,
           sendMessage,
           retrieveUserId()
@@ -112,20 +112,19 @@ function UserInputForm({ onTranscriptionReceived }) {
           >
             <span className="button-content">
               <span className="button-text">
-                {isDecrypting ? 'Decrypting' : 'Extract Data'}
+                {isDecrypting ? 'Decrypting' : 'Send Target'}
               </span>
               {isDecrypting && <span className="loading-dots">{dots}</span>}
             </span>
           </button>
           <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-            className="language-selector"
+            value={operationType}
+            onChange={(e) => setOperationType(e.target.value)}
+            className="operationType-selector"
             disabled={isDecrypting}
           >
-            <option value="en">NeoEnglish</option>
-            <option value="es">CyberSpanish</option>
-            <option value="">AutoDecode</option>
+            <option value="process">Brain Process</option>
+            <option value="transcribe">Transcribe Process</option>
           </select>
         </div>
       </form>

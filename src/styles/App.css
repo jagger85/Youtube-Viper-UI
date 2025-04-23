@@ -206,7 +206,7 @@ input, .text-area, .form-actions {
   box-sizing: border-box;
 }
 
-button, .language-selector {
+button, .operationType-selector {
   flex: 1;
   padding: 0.75rem 1rem;
   border: none;
@@ -218,7 +218,7 @@ button, .language-selector {
   text-align: center; /* Ensure text is centered */
 }
 
-.language-selector {
+.operationType-selector {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -228,11 +228,11 @@ button, .language-selector {
   padding-right: 2.5rem;
 }
 
-.language-selector::-ms-expand {
+.operationType-selector::-ms-expand {
   display: none;
 }
 
-button:hover, .language-selector:hover {
+button:hover, .operationType-selector:hover {
   background-color: #0090a8;
 }
 
@@ -258,7 +258,7 @@ button:hover, .language-selector:hover {
   margin-top: 1rem;
 }
 
-.language-selector {
+.operationType-selector {
   width: auto;
   padding: 0.5rem 1rem;
   border: none;
@@ -268,7 +268,7 @@ button:hover, .language-selector:hover {
   transition: background-color 0.3s ease;
 }
 
-.language-selector:hover {
+.operationType-selector:hover {
   background-color: #0090a8;
 }
 

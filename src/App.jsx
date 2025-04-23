@@ -25,7 +25,7 @@ function App() {
             <ResponseTextArea text={transcriptionText} />
           </div>
           <EventDisplay />
-            <Icons />
+            <Icons text={transcriptionText} />
         </div>
       </div>
     </MessageProvider>
