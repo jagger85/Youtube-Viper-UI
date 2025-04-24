@@ -23,7 +23,6 @@ form {
 
 .input-label-container {
   background-color: var(--secondary-bg);
-  height: 2rem;
   display: flex;
   align-items: center;
   padding-left: 10px;

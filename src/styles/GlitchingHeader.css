@@ -1,6 +1,6 @@
 .glitching-text {
   position: relative;
-  display: inline-block;
+  align-self: center;
 }
 
 .glitch {

@@ -13,7 +13,6 @@ function ResponseTextArea({ text }) {
         placeholder="Scrapped text will appear here..."
         tabIndex="-1"
         onFocus={(e) => e.target.blur()}
-        style={{ resize: 'none' }}
       />
   )
 }

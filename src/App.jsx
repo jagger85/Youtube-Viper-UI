@@ -16,18 +16,16 @@ function App() {
 
   return (
     <MessageProvider>
-        <div className="terminal-wrapper">
-            <GlitchingText text="Data Extraction Terminal"/>
-             <div className="horizontal-layout">
-                <UserInputForm onTranscriptionReceived={handleTranscriptionReceived} />
-                <EventDisplay />
-                <div className='vertical-layout'>
-                <ResponseTextArea text={transcriptionText} />
-                <Icons text={transcriptionText} />
-                </div>
-              </div>
-        
+      <div className="terminal-wrapper">
+        <div className="horizontal-layout">
+        <GlitchingText text="Data Extraction Terminal" />
+          <UserInputForm onTranscriptionReceived={handleTranscriptionReceived} />
+          <EventDisplay />
+          <ResponseTextArea text={transcriptionText} />
+          <Icons text={transcriptionText} />
         </div>
+
+      </div>
     </MessageProvider>
   )
 }

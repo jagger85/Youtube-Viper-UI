@@ -105,6 +105,15 @@ function UserInputForm({ onTranscriptionReceived }) {
           />
         </div>
         <div className="form-actions">
+          <select
+            value={operationType}
+            onChange={(e) => setOperationType(e.target.value)}
+            className="operationType-selector"
+            disabled={isDecrypting}
+          >
+            <option value="process">Brain Process</option>
+            <option value="transcribe">Transcribe Process</option>
+          </select>
           <button
             type="submit"
             disabled={isDecrypting}
@@ -117,16 +126,8 @@ function UserInputForm({ onTranscriptionReceived }) {
               {isDecrypting && <span className="loading-dots">{dots}</span>}
             </span>
           </button>
-          <select
-            value={operationType}
-            onChange={(e) => setOperationType(e.target.value)}
-            className="operationType-selector"
-            disabled={isDecrypting}
-          >
-            <option value="process">Brain Process</option>
-            <option value="transcribe">Transcribe Process</option>
-          </select>
         </div>
+
       </form>
     </div>
   )
