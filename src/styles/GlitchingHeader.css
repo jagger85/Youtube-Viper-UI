@@ -1,6 +1,8 @@
 .glitching-text {
   position: relative;
   align-self: center;
+  font-size: var(--font-size-large);
+  padding: var(--spacing-small);
 }
 
 .glitch {

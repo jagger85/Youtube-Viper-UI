@@ -4,6 +4,7 @@ form {
 
 .input-wrapper {
   width: 100%;
+
 }
 
 .input-wrapper input {
@@ -25,14 +26,9 @@ form {
   background-color: var(--secondary-bg);
   display: flex;
   align-items: center;
-  padding-left: 10px;
-  font-size: 0.8rem;
-  width: 5rem;
+  padding-left: var(--spacing-medium);
+  min-width: 6rem;
   color: var(--accent-color);
-}
-.input-label {
-  font-size: 1rem; 
-  padding: 0.5rem;
 }
 
 .input-container {
@@ -41,6 +37,7 @@ form {
   align-items: center;
   width: 100%;
   border: 1px solid var(--accent-color);
+  font-size: var(--font-size-medium);
 }
 
 #promptInput, #urlInput {

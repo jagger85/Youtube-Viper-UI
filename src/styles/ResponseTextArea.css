@@ -7,7 +7,7 @@
   font-family: inherit;
   resize: none;
   user-select: none;
-
+  font-size: var(--font-size-medium);
 
   /* Make text unselectable */
   -webkit-user-select: none;

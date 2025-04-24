@@ -58,6 +58,7 @@ button {
   border: none;
   background-color: var(--secondary-bg);
   color: var(--text-color);
+  font-size: var(--font-size-medium);
 }
 
 button {
@@ -135,6 +136,7 @@ button,
   color: var(--bg-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: var(--font-size-medium);
 }
 
 .operationType-selector {
