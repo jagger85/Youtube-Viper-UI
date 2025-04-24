@@ -35,8 +35,8 @@ Think of this as the cool cyberpunk command center where you can control the bac
 
 1. Clone this bad boy:
 ```bash
-git clone https://github.com/your-username/speecher-ui.git
-cd speecher-ui
+git clone https://github.com/jagger85/Youtube-Viper-UI.git
+cd Youtube-Viper-UI
 ```
 
 2. Install the goodies:
