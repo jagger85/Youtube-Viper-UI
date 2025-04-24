@@ -71,11 +71,11 @@ form {
   100% { clip-path: inset(50% 0 30% 0); }
 }
 
-/* Keep the existing styles for .operationType-selector and other elements */
+
 
 .input-label-container {
-  background-color: var(--secondary-bg); /* Match the input background color */
-  height: 2rem; /* Optional: Add padding for better appearance */
+  background-color: var(--secondary-bg);
+  height: 2rem;
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -95,12 +95,12 @@ form {
 }
 
 .input-label {
-  font-size: 1rem; /* Match the input text size */
-  padding: 0.5rem; /* Optional: Add padding for better appearance */
-  margin-right: 10px; /* Maintain spacing from the input */
+  font-size: 1rem; 
+  padding: 0.5rem;
+  margin-right: 10px;
 }
 .input-container {
-  background-color: black; /* Match the input background color */
+  background-color: black;
   display: flex;
   align-items: center;
   width: 100%;

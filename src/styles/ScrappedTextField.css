@@ -1,8 +1,8 @@
 .textarea-wrapper {
   position: relative;
   width: 100%;
-  height: 150px; /* Adjust as needed */
-  margin-bottom: 1rem; /* Add this line to create space */
+  height: 150px;
+  margin-bottom: 1rem;
 }
 
 .text-area {
@@ -20,7 +20,6 @@
   -ms-user-select: none;
 }
 
-/* Custom scrollbar styles */
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
 }
@@ -34,7 +33,6 @@
   border: none;
 }
 
-/* For Firefox */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) var(--secondary-bg);
@@ -55,5 +53,5 @@
 }
 
 .copy-button:hover {
-  background-color: #0090a8; /* Darker shade of the accent color */
+  background-color: #0090a8;
 }
