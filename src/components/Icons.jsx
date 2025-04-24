@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import InfoSquare from '../assets/info-square-svgrepo-com.svg'
 import FloppyDisk from '../assets/floppy-disk-svgrepo-com.svg'
 import Copy from '../assets/copy-svgrepo-com.svg'
 import { useSendMessage } from '../contexts/MessageContext'
@@ -7,6 +6,7 @@ import useStoreFile from '../hooks/useStoreFile'
 import { MESSAGE_TYPE } from '../constants/messageType'
 
 const Icons = (props) => {
+  const { text, setInfoVisible} = props
   const [hoveredIcon, setHoveredIcon] = useState(null)
   const { storeFile, copyNeoToClipboard, createTxtFile } = useStoreFile()
   const sendMessage = useSendMessage()
@@ -31,28 +31,14 @@ const Icons = (props) => {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '1rem',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <img
-        src={InfoSquare}
-        alt="Info Square"
-        style={iconStyle('info')}
-        onMouseEnter={() => setHoveredIcon('info')}
-        onMouseLeave={() => setHoveredIcon(null)}
-      />
+    <div className='icon-container'>
       <img
         src={FloppyDisk}
         alt="Floppy Disk"
         style={iconStyle('floppy')}
         onMouseEnter={() => setHoveredIcon('floppy')}
         onMouseLeave={() => setHoveredIcon(null)}
-        onClick={()=>createTxtFile(props.text)}
+        onClick={()=>createTxtFile(text)}
       />
       <img
         src={Copy}
@@ -60,7 +46,7 @@ const Icons = (props) => {
         style={iconStyle('copy')}
         onMouseEnter={() => setHoveredIcon('copy')}
         onMouseLeave={() => setHoveredIcon(null)}
-        onClick={()=>copyNeoToClipboard(props.text)}
+        onClick={()=>copyNeoToClipboard(text)}
       />
       <input
         type="file"

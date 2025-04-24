@@ -73,7 +73,7 @@ function UserInputForm({ onTranscriptionReceived }) {
     }
   }
   return (
-    <div className="user-input-form">
+    <div className='form-container'>
       <form onSubmit={handleSubmit}>
         <div
           className="input-container"

@@ -14,7 +14,7 @@ function EventDisplay() {
   }, [messages]);
 
   return (
-    <div className="event-display cyberpunk-terminal">
+    <div className="event-display">
       <div className="terminal-body" ref={eventContainerRef}>
         {messages.map((message, index) => (
           <div key={index} className={`log-entry ${message.type}`}>

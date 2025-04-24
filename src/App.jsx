@@ -7,6 +7,7 @@ import './styles/App.css'
 import Icons from './components/Icons'
 import GlitchingText from './components/GlitchingText'
 function App() {
+
   const [transcriptionText, setTranscriptionText] = useState('');
 
   const handleTranscriptionReceived = (text) => {
@@ -15,19 +16,18 @@ function App() {
 
   return (
     <MessageProvider>
-      <div className="app-container">
-          <div className="tech-border">
-            <div className="content-wrapper">
-              <GlitchingText text="Data Extraction Terminal" />
-          </div>
-          <div className="horizontal-layout">
-            <UserInputForm onTranscriptionReceived={handleTranscriptionReceived} />
-            <ResponseTextArea text={transcriptionText} />
-          </div>
-          <EventDisplay />
-            <Icons text={transcriptionText} />
+        <div className="terminal-wrapper">
+            <GlitchingText text="Data Extraction Terminal"/>
+             <div className="horizontal-layout">
+                <UserInputForm onTranscriptionReceived={handleTranscriptionReceived} />
+                <EventDisplay />
+                <div className='vertical-layout'>
+                <ResponseTextArea text={transcriptionText} />
+                <Icons text={transcriptionText} />
+                </div>
+              </div>
+        
         </div>
-      </div>
     </MessageProvider>
   )
 }
