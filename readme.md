@@ -1,4 +1,4 @@
-# Speecher UI 🎨 -> 💻 -> 🚀
+# Youtube Viper UI 🎨 -> 💻 -> 🚀
 
 [![React][React.js]][React-url]<br>
 Hey there! Welcome to the frontend of the YouTube-Viper. This is where all the magic gets a face, and trust me, it's got style! 
