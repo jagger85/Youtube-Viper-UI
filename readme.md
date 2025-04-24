@@ -43,14 +43,8 @@ cd speecher-ui
 ```bash
 npm install
 ```
-3. Create a `.env` file in the root directory (don't worry, it's simple):
-```env
-VITE_API_URL=your_api_url
-VITE_BACKEND_HOST=localhost
-VITE_BACKEND_PORT=8000
-```
 
-4. Fire it up:
+3. Fire it up:
 ```bash
 npm run dev
 ```
