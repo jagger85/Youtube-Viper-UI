@@ -6,8 +6,9 @@ const MessageContext = createContext();
 
 export const MessageProvider = ({ children }) => {
   const { saveUserId } = useStorage();
+  const [currentMessage, setCurrentMessage] = useState(null);
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8000/echo', {
+  const { lastMessage } = useWebSocket('ws://localhost:8000/echo', {
     shouldReconnect: () => true,
     reconnectAttempts: 10,
     reconnectInterval: 3000,
@@ -20,54 +21,41 @@ export const MessageProvider = ({ children }) => {
     }
   }, [lastMessage]);
 
-
-  const [messages, setMessages] = useState([]);
-
   const addMessage = useCallback((message) => {
+    switch (message.type) {
+      case 'PROGRESS':
+        setCurrentMessage({ type: 'progress', content: message.content });
+        break;
 
-    setMessages((prevMessages) => {
-      const newMessages = [...prevMessages];
+      case MESSAGE_TYPE.LOGIN:
+        saveUserId(message.client_id);
+        setCurrentMessage({ type: 'login', content: "You are connected to the brain" });
+        break;
 
-      switch (message.type) {
-        case 'PROGRESS':
-          if (newMessages.length > 0 && newMessages[newMessages.length - 1].type === 'progress') {
-            newMessages[newMessages.length - 1] = { type: 'progress', content: msg };
-          } else {
-            newMessages.push({ type: 'progress', content: msg });
-          }
-          break
+      case MESSAGE_TYPE.OPERATION_STATUS:
+        setCurrentMessage({ type: message.type, content: `Your operation is currently ${message.status}` });
+        break;
 
-        case MESSAGE_TYPE.LOGIN:
-          saveUserId(message.client_id);
-          newMessages.push({ type: 'login', content: "You are connected to the brain" });
-          break
+      case MESSAGE_TYPE.INFO:
+        setCurrentMessage({ type: message.type, content: message.content });
+        break;
 
-        case MESSAGE_TYPE.OPERATION_STATUS:
-          newMessages.push({ type: message.type, content: `Your operation is currently ${message.status}` });
-          break
-
-        case MESSAGE_TYPE.INFO:
-          newMessages.push({ type: message.type, content: message.content })
-          break
-        default:
-          console.log('Unknown message type:', message.type);
-          console.log('Message:', message);
-      }
-
-      return newMessages;
-    });
+      default:
+        console.log('Unknown message type:', message.type);
+        console.log('Message:', message);
+    }
   }, []);
 
   const addInternalMessage = useCallback((message) => {
-    setMessages((prevMessages) => [...prevMessages, { type: 'internal', content: message }]);
+    setCurrentMessage({ type: 'internal', content: message });
   }, []);
 
-  const clearMessages = useCallback(() => {
-    setMessages([]);
+  const clearMessage = useCallback(() => {
+    setCurrentMessage(null);
   }, []);
 
   return (
-    <MessageContext.Provider value={{ messages, addMessage, addInternalMessage, clearMessages }}>
+    <MessageContext.Provider value={{ currentMessage, addMessage, addInternalMessage, clearMessage }}>
       {children}
     </MessageContext.Provider>
   );
@@ -85,7 +73,7 @@ export const useSendInternalMessage = () => {
   return addInternalMessage;
 };
 
-export const useClearMessages = () => {
-  const { clearMessages } = useMessageContext();
-  return clearMessages;
+export const useClearMessage = () => {
+  const { clearMessage } = useMessageContext();
+  return clearMessage;
 };

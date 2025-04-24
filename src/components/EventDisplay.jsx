@@ -1,28 +1,19 @@
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import '../styles/EventDisplay.css'
 import { useMessageContext } from '../contexts/MessageContext'
 
 function EventDisplay() {
-  const { messages } = useMessageContext();
-  const eventContainerRef = useRef(null);
-
-
-  useEffect(() => {
-    if (eventContainerRef.current) {
-      eventContainerRef.current.scrollTop = eventContainerRef.current.scrollHeight;
-    }
-  }, [messages]);
+  const { currentMessage } = useMessageContext();
 
   return (
     <div className="event-display">
-      <div className="terminal-body" ref={eventContainerRef}>
-        {messages.map((message, index) => (
-          <div key={index} className={`log-entry ${message.type}`}>
+      <div className="terminal-body">
+        {currentMessage ? (
+          <div className={`log-entry ${currentMessage.type}`}>
             <span className="prompt">&gt; </span>
-            <span className={`message ${message.type}`}>{message.content}</span>
+            <span className={`message ${currentMessage.type}`}>{currentMessage.content}</span>
           </div>
-        ))}
-        {messages.length === 0 && (
+        ) : (
           <div className="log-entry awaiting">
             <span className="prompt">&gt; </span>
             <span className="message">Awaiting your next input... system on standby</span>
