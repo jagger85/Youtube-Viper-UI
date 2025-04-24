@@ -16,8 +16,13 @@ export const MessageProvider = ({ children }) => {
 
   useEffect(() => {
     if (lastMessage !== null) {
-      console.log(lastMessage.data);
-      addMessage(JSON.parse(lastMessage.data));
+      console.log('WebSocket message received:', lastMessage.data);
+      try {
+        const parsedMessage = JSON.parse(lastMessage.data);
+        addMessage(parsedMessage);
+      } catch (error) {
+        console.error('Error parsing WebSocket message:', error);
+      }
     }
   }, [lastMessage]);
 
@@ -27,14 +32,14 @@ export const MessageProvider = ({ children }) => {
         setCurrentMessage({ type: 'progress', content: message.content });
         break;
 
-      case MESSAGE_TYPE.LOGIN:
-        saveUserId(message.client_id);
-        setCurrentMessage({ type: 'login', content: "You are connected to the brain" });
-        break;
+        case MESSAGE_TYPE.LOGIN:
+          saveUserId(message.client_id);
+          setCurrentMessage({ type: 'login', content: "You are connected to the brain" });
+          break;
 
-      case MESSAGE_TYPE.OPERATION_STATUS:
-        setCurrentMessage({ type: message.type, content: `Your operation is currently ${message.status}` });
-        break;
+        case MESSAGE_TYPE.OPERATION_STATUS:
+          setCurrentMessage({ type: message.type, content: `Your operation is currently ${message.status}` });
+          break;
 
       case MESSAGE_TYPE.INFO:
         setCurrentMessage({ type: message.type, content: message.content });
