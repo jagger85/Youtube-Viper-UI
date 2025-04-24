@@ -1,9 +1,9 @@
 const getBaseUrl = () => {
-  return `http://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}`
+  return `http://localhost:8000`
 }
 
 const getWebsocketUrl = () => {
-  return `ws://${import.meta.env.VITE_BACKEND_HOST}:${import.meta.env.VITE_BACKEND_PORT}/echo`
+  return `ws://localhost:8000/echo`
 }
 
 export const WEB_SOCKET_URL = getWebsocketUrl()
